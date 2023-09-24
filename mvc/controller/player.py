@@ -1,27 +1,17 @@
 from mvc.model.player import Player
-import datetime
-regex = datetime.datetime.strptime
+import re
+
 
 class PlayerController:
-    @staticmethod
-    def ChoosePlayer():
-        players = Player.LoadPlayers()
-        columns = []
-        for item in players:
-            temp = []
-            temp.append(item["id"])
-            temp.append(item["nom"])
-            temp.append(item["prenom"])
-            temp.append(item["dob"])
-            columns.append(temp)
-        from mvc.view.player import PlayerView
-        PlayerView.DisplayPlayers(columns)
-    
     def create(self, nom, prenom, dob):
-        
-        player = Player(nom, prenom, dob)
-        player.save()
+        dob_pattern = r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$'
+        if re.match(dob_pattern, dob):
+            player = Player(nom, prenom, dob)
+            player.save()
+            return True
 
-    @staticmethod
-    def delete(pid):
-        Player.deletePlayer(pid)
+    def delete(self, pid):
+        try:
+            Player.deletePlayer(int(pid))
+        except:
+            print("pas bon")

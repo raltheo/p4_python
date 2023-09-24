@@ -13,5 +13,3 @@ class Round:
             self.end_datetime,
             self.matches
         ]
-
-    

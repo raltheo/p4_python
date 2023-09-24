@@ -1,8 +1,9 @@
 from mvc.view.player import PlayerView
 
+
 class ViewMenu:
-    @staticmethod
-    def Banner():
+
+    def Banner(self):
         print(r"""
     
                                                        .::.
@@ -17,21 +18,9 @@ class ViewMenu:
   _|_|_    |___|_|   _|____|_   (_____)   (______)   (______)
  (_____)  (_______) (________) (_______) (________) (________)
  /_____\  /_______\ /________\ /_______\ /________\ /________\
-
 """)
-    @staticmethod
-    def begin():
-        ViewMenu.Banner()
-        print("1 Create Tournament\n2 Manage Player\n3 View Some Stats")
-        try:
-            response = int(input())
-        except: 
-            print("please put a number")
-        if response == 1:
-            print("pas encore fais")
-        elif response == 2:
-            PlayerView().menu()
-        elif response == 3:
-            print("pas encore fais")
-        else:
-            print("please choose a good number")
+
+    def begin(self):
+        print("\n\n1 Create Tournament\n2 Manage Player\n3 View Some Stats\n4 Exit")
+        response = input()
+        return response
