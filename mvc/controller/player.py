@@ -12,6 +12,12 @@ class PlayerController:
 
     def delete(self, pid):
         try:
+            players = Player.LoadPlayers()
             Player.deletePlayer(int(pid))
+            playersafter = Player.LoadPlayers()
+            if len(players) > len(playersafter):
+                return True
+            else:
+                return False
         except:
-            print("pas bon")
+            return False

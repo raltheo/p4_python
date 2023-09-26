@@ -15,4 +15,4 @@ class TournamentController:
             temp.append(item["prenom"])
             temp.append(item["dob"])
             columns.append(temp)
-        PlayersView.DisplayPlayers(test)
+        PlayersView.DisplayPlayers(columns)

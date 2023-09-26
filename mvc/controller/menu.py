@@ -37,4 +37,8 @@ class MenuController:
         if response == "2":
             players = Player.LoadPlayers()
             response = self.views.viewplayer.displayPlayers(players)
-            self.controllers.playercontroller.delete(response)
+            ok = self.controllers.playercontroller.delete(response)
+            if ok:
+                self.views.viewplayer.delete()
+            else:
+                self.views.viewplayer.error()

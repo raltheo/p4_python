@@ -18,25 +18,28 @@ class PlayerView:
         x.field_names = ["id", "nom", "prenom", "dob", "win"]
         for item in columns:
             x.add_row(item)
-        print("\nChoose an Player Id\n")
+        print("\n")
         print(x)
-        response = input()
+        response = input("\nChoose a player id : ")
         return response
 
     def menu(self):
-        print("\n1 Create Player\n2 Delete Player\n3 Back")
+        print("\n[1] Create Player\n[2] Delete Player\n[3] Back")
         repsonse = input()
         return repsonse
 
     def promtNewPlayer(self):
         print("\n")
-        nom = input("enter last name : ")
-        prenom = input("enter first name : ")
-        dob = input("enter date of birth : ")
+        nom = input("Enter last name : ")
+        prenom = input("Enter first name : ")
+        dob = input("Enter date of birth : ")
         return nom, prenom, dob
 
     def saved(self):
-        green("player saved !")
+        green("Player saved !")
 
     def error(self):
-        red("une érreur est survenue")
+        red("An error occurred.")
+
+    def delete(self):
+        green("player deleted !")

@@ -21,6 +21,7 @@ class ViewMenu:
 """)
 
     def begin(self):
-        print("\n\n1 Create Tournament\n2 Manage Player\n3 View Some Stats\n4 Exit")
+        print(
+            "\n\n[1] Create Tournament\n[2] Manage Player\n[3] View Some Stats\n[4] Exit")
         response = input()
         return response

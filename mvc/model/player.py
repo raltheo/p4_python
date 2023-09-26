@@ -28,7 +28,7 @@ class Player:
     @staticmethod
     def deletePlayer(pid):
         db_player = TinyDB('db/db.json').table('player')
-        ok = db_player.remove(where('id') == pid)
+        db_player.remove(where('id') == pid)
 
     @staticmethod
     def LoadPlayers():
