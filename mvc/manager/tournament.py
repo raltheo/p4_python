@@ -8,6 +8,7 @@ class ManageTournament:
     def save(self, tournament):
         self.tid = self.tournament_table.insert(tournament)
         self.tournament_table.update({'id': self.tid}, doc_ids=[self.tid])
+        return self.tid
 
     def add_round(self, tid, roundid: int):
         query = Query()

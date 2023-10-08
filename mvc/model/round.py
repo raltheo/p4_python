@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class Round:
     def __init__(self, tournoisId: int, name: str):
         self.tournoisId = tournoisId
@@ -7,11 +9,13 @@ class Round:
         self.finish = False
 
     def serialize(self):
+        now = datetime.now()
+        formatted_date = now.strftime("%d-%m-%Y-%H-%M")
         return {
             "roundId" : 0,
             "tournoisId" : self.tournoisId,
             "name" : self.name,
-            "start" : self.start,
+            "start" : formatted_date,
             "end" : self.end,
             "finish": self.finish
         }

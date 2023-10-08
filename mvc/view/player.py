@@ -13,7 +13,6 @@ def red(text):
 class PlayerView:
 
     def displayPlayers(self, columns: list):
-
         x = PrettyTable()
         x.field_names = ["id", "nom", "prenom", "dob", "points"]
         for item in columns:

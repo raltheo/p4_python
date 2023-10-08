@@ -1,29 +1,25 @@
 from tinydb import TinyDB, Query, where
-
+from datetime import datetime
 
 class Tournament:
-    def __init__(self, name: str, location: str, description: str, players: list, start_date: str = 0, end_date: str = 0, rounds: list = [], current_round: int = 0, round_total: int = 4, tid: int = 0):
-        self.tid = tid
+    def __init__(self, name: str, location: str, description: str, players: list, round_total: int = 4):
         self.name = name
         self.location = location
-        self.start_date = start_date
-        self.end_date = end_date
         self.round_total = round_total
-        self.current_round = current_round
-        self.rounds = rounds
         self.players = players
         self.description = description
-        self.db_tournament = TinyDB('db/db.json').table('tournament')
 
     def serialize(self):
+        now = datetime.now()
+        formatted_date = now.strftime("%d-%m-%Y-%H-%M")
         return {
-            "id": self.tid,
+            "id": 0,
             "nom": self.name,
             "location": self.location,
-            "start": self.start_date,
-            "end": self.end_date,
+            "start": formatted_date,
+            "end": "after",
             "round_total": self.round_total,
-            "rounds": self.rounds,
+            "rounds": [],
             "players": self.players,
             "description": self.description
         }

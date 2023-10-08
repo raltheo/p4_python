@@ -16,7 +16,7 @@ class PlayerManager:
             self.db_player.update({'id': self.pid}, doc_ids=[self.pid])
             return True
 
-    def deletePlayer(self, pid):
+    def delete_player(self, pid):
         self.db_player.remove(where('id') == pid)
 
     def load_players(self):

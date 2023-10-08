@@ -92,8 +92,24 @@ matchmanager = MatchManager()
 #     matchmanager.update_score(id, score)
 # print(matchmanager.load_match(id))
 
+# maxs = 4
+# test = [1,1,1,1]
+# print(len(test))
 
+from datetime import datetime
 
+# Get the current date and time
+now = datetime.now()
+
+# Format the datetime object as "dd-mm-yyyy-hh-mm"
+formatted_date = now.strftime("%d-%m-%Y-%H-%M")
+
+print(formatted_date)
+
+test1 = [1,1,1]
+test2 = [1,1,1,1]
+print(len(test1) % 2)
+print(len(test2) % 2)
 
 
 
