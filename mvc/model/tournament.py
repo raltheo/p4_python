@@ -15,8 +15,8 @@ class Tournament:
         self.description = description
         self.db_tournament = TinyDB('db/db.json').table('tournament')
 
-    def Save(self):
-        self.tid = self.db_tournament.insert({
+    def serialize(self):
+        return {
             "id": self.tid,
             "nom": self.name,
             "location": self.location,
@@ -26,13 +26,10 @@ class Tournament:
             "rounds": self.rounds,
             "players": self.players,
             "description": self.description
-        })
-        self.db_tournament.update({'id': self.tid}, doc_ids=[self.tid])
+        }
+    
+    
 
-    def NewRound(self, round: list):
-        print("test")
+    
 
-    @staticmethod
-    def LoadTournament():
-        db_tournament = TinyDB('db/db.json').table('tournament').all()
-        return db_tournament
+    

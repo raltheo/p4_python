@@ -1,15 +1,17 @@
 class Round:
-    def __init__(self, name: str):
-        self.start = start
-        self.end = end
+    def __init__(self, tournoisId: int, name: str):
+        self.tournoisId = tournoisId
         self.name = name
-        self.matches = []
+        self.start = "now"
+        self.end = "after"
+        self.finish = False
 
-    def NewRound(self):
-        """Return round info as list"""
-        return [
-            self.round_name,
-            self.start_datetime,
-            self.end_datetime,
-            self.matches
-        ]
+    def serialize(self):
+        return {
+            "roundId" : 0,
+            "tournoisId" : self.tournoisId,
+            "name" : self.name,
+            "start" : self.start,
+            "end" : self.end,
+            "finish": self.finish
+        }

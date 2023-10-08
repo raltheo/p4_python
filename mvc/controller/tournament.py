@@ -16,3 +16,4 @@ class TournamentController:
             temp.append(item["dob"])
             columns.append(temp)
         PlayersView.DisplayPlayers(columns)
+
