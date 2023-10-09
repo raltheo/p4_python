@@ -10,6 +10,8 @@ from mvc.manager.match import MatchManager
 
 import random
 import json
+import itertools
+
 
 tournamentmanager = ManageTournament()
 playermanager = PlayerManager()
@@ -101,13 +103,61 @@ matchmanager = MatchManager()
 
 # create rounddDDDDDDDDDDDDDDDDDDDDDDDDD
 
+def have_played_together(pairs, player1, player2):
+    for pair in pairs:
+        if (player1 in pair and player2 in pair):
+            return True
+    return False
+
+
 rounds = tournamentmanager.load_tournament(1)['rounds']
-rid = rounds[len(rounds)-1]
-verif = roundmanager.load_round(rid)
-if verif['finish'] == False:
+last_rid = rounds[len(rounds)-1]
+last_round = roundmanager.load_round(last_rid)
+if last_round['finish'] == False:
     print("pas possible round avant pas fini")
     exit()
 
+all_matche = []
+for rid in rounds:
+    temp = matchmanager.load_all_match(rid)
+    for te in temp:
+        all_matche.append([te[1], te[3]])
+print(all_matche)
+
+match_last = matchmanager.load_all_match(last_rid)
+players = []
+for match in match_last:
+    players.append([match[1], match[2]])
+    players.append([match[3], match[4]])
+players = sorted(players, key=lambda x: x[1], reverse=True)
+
+
+players_sorted = []
+for player in players:
+    players_sorted.append(player[0])
+print(players_sorted)
+
+combinations = list(itertools.combinations(players_sorted, 2))
+new_match = []
+
+while players_sorted != []:
+    first = players_sorted.pop(0)
+    found = False
+    for second in players_sorted:
+        if have_played_together(all_matche, first, second):
+            continue
+        players_sorted.remove(second)
+        new_match.append([first, second])
+        found = True
+        break
+    if not found:
+        second = players_sorted.pop(0)
+        new_match.append([first, second])
+
+
+print(new_match)
+    # matche = Match(4, player1=players[i], player2=players[i+1], scores=[0, 0])
+    # print(matche)
 
 # from datetime import datetime
 
