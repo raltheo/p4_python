@@ -41,3 +41,49 @@ class TournamentView:
     
     def first_round(self):
         green("Tournament and First round saved, go to continue tournament to see match, enter results and generate next round")
+
+    def resume(self, columns: list):
+        x = PrettyTable()
+        x.field_names = ["id", "nom", "location", "description", "start", "end"]
+        for item in columns:
+            x.add_row(item)
+        print("\n")
+        print(x)
+        print("[back] return menu")
+        tournament_id = input("\nChoose tournament id: ")
+        return tournament_id
+        
+    def rounds(self, columns: list):
+        x = PrettyTable()
+        x.field_names = ["id", "nom", "start", "end", "finish"]
+        for item in columns:
+            x.add_row(item)
+        print("\n")
+        print(x)
+        print("[0] Create new round")
+        print("[back] return menu")
+        round_id = input("\nChoose round id: ")
+        return round_id
+    
+    def match(self, columns: list):
+        x = PrettyTable()
+        x.field_names = ["id", "player1", "score player1", "player2", "score player2", "finish"]
+        for item in columns:
+            x.add_row(item)
+        print("\n")
+        print(x)
+        print("[0] back")
+        round_id = input("\nChoose match id for update result: ")
+        return round_id
+    
+    def update_score(self, player1, player2):
+        print("\n")
+        print(f"[1] player1 ({player1}) win")
+        print(f"[1] player2 ({player2}) win")
+        print(f"[3] match null")
+        print(f"[4] back")
+        response = input()
+        return response
+    
+    def match_saved(self):
+        green("Match result saved !")

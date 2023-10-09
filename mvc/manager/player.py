@@ -3,24 +3,27 @@ from tinydb import TinyDB, Query, where
 
 class PlayerManager:
     def __init__(self):
-        self.db_player = TinyDB('db/db.json').table('player')
+        pass
 
     def save(self, player):
+        db_player = TinyDB('db/db.json').table('player')
         try:
-            verif = self.db_player.search((where('nom') == self.nom) & (
+            verif = db_player.search((where('nom') == self.nom) & (
             where('prenom') == self.prenom) & (where('dob') == self.dob))
         except:
             verif = False
         if not verif:
-            self.pid = self.db_player.insert(player)
-            self.db_player.update({'id': self.pid}, doc_ids=[self.pid])
+            self.pid = db_player.insert(player)
+            db_player.update({'id': self.pid}, doc_ids=[self.pid])
             return True
 
     def delete_player(self, pid):
-        self.db_player.remove(where('id') == pid)
+        db_player = TinyDB('db/db.json').table('player')
+        db_player.remove(where('id') == pid)
 
     def load_players(self):
-        db_player_all = self.db_player.all()
+        db_player = TinyDB('db/db.json').table('player')
+        db_player_all = db_player.all()
         columns = []
         for item in db_player_all:
             temp = []
@@ -33,6 +36,7 @@ class PlayerManager:
         return columns
 
     def get_player(self, pid):
+        db_player = TinyDB('db/db.json').table('player')
         query = Query()
-        db_player = self.db_player.search(query.id == pid)
+        db_player = db_player.search(query.id == pid)
         return db_player[0]

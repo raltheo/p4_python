@@ -96,20 +96,33 @@ matchmanager = MatchManager()
 # test = [1,1,1,1]
 # print(len(test))
 
-from datetime import datetime
+# print(roundmanager.load_all_round(1))
 
-# Get the current date and time
-now = datetime.now()
 
-# Format the datetime object as "dd-mm-yyyy-hh-mm"
-formatted_date = now.strftime("%d-%m-%Y-%H-%M")
+# create rounddDDDDDDDDDDDDDDDDDDDDDDDDD
 
-print(formatted_date)
+rounds = tournamentmanager.load_tournament(1)['rounds']
+rid = rounds[len(rounds)-1]
+verif = roundmanager.load_round(rid)
+if verif['finish'] == False:
+    print("pas possible round avant pas fini")
+    exit()
 
-test1 = [1,1,1]
-test2 = [1,1,1,1]
-print(len(test1) % 2)
-print(len(test2) % 2)
+
+# from datetime import datetime
+
+# # Get the current date and time
+# now = datetime.now()
+
+# # Format the datetime object as "dd-mm-yyyy-hh-mm"
+# formatted_date = now.strftime("%d-%m-%Y-%H-%M")
+
+# print(formatted_date)
+
+# test1 = [1,1,1]
+# test2 = [1,1,1,1]
+# print(len(test1) % 2)
+# print(len(test2) % 2)
 
 
 

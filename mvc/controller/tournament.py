@@ -41,11 +41,35 @@ class TournamentController:
         round = Round(tid, name)
         rid = self.roundmanager.save(round.serialize())
         self.tournamentmanager.add_round(tid=tid, roundid=rid)
-        print(self.tournamentmanager.load_tournament(tid))
 
         players = self.tournamentmanager.load_tournament(tid)["players"]
         random.shuffle(players)
         for i in range(0, len(players), 2):
             matche = Match(rid, player1=players[i], player2=players[i+1], scores=[0, 0])
             self.matchmanager.save(matche.serialize())
+        return True
+    
+    def manage_point(self, mid, result):
+        matche = self.matchmanager.load_match(mid)
+        if matche['finish'] == True:
+            return False
+        score = matche['scores']
+        if result == 1:
+            score[0] += 1
+            self.matchmanager.update_score(mid, score)
+        if result == 2:
+            score[1] += 1
+            self.matchmanager.update_score(mid, score)
+        if result == 3:
+            score[0] += 0.5
+            score[1] += 0.5
+            self.matchmanager.update_score(mid, score)
+
+        matches = self.matchmanager.load_all_match(matche['roundId'])
+        finish = True
+        for match in matches:
+            if match[5] == False:
+                finish = False
+        if finish:
+            self.roundmanager.finish_round(matche['roundId'])
         return True
