@@ -130,29 +130,29 @@ for match in match_last:
     players.append([match[1], match[2]])
     players.append([match[3], match[4]])
 players = sorted(players, key=lambda x: x[1], reverse=True)
-
+print(players)
 
 players_sorted = []
 for player in players:
     players_sorted.append(player[0])
 print(players_sorted)
 
-combinations = list(itertools.combinations(players_sorted, 2))
 new_match = []
 
-while players_sorted != []:
-    first = players_sorted.pop(0)
+while players != []:
+    first = players.pop(0)
+    print(first)
     found = False
-    for second in players_sorted:
-        if have_played_together(all_matche, first, second):
+    for second in players:
+        if have_played_together(all_matche, first[0], second[0]):
             continue
-        players_sorted.remove(second)
-        new_match.append([first, second])
+        players.remove(second)
+        new_match.append([first[0], second[0]])
         found = True
         break
     if not found:
         second = players_sorted.pop(0)
-        new_match.append([first, second])
+        new_match.append([first[0], second[0]])
 
 
 print(new_match)

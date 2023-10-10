@@ -73,7 +73,12 @@ class MenuController:
             rounds = self.manager.roundmanager.load_all_round(int(tid))
             rid = self.views.viewtournament.rounds(rounds)
             if rid == "0":
-                print("new round")
+                name = self.views.viewtournament.new_round()
+                if self.controllers.tournamentcontroller.create_round(int(tid), name):
+                    self.views.viewtournament.round_saved()
+                    return
+                self.views.viewtournament.error()
+                return
             if rid == "back":
                 return
             matches = self.manager.matchmanager.load_all_match(int(rid))

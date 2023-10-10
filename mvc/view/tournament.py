@@ -79,7 +79,7 @@ class TournamentView:
     def update_score(self, player1, player2):
         print("\n")
         print(f"[1] player1 ({player1}) win")
-        print(f"[1] player2 ({player2}) win")
+        print(f"[2] player2 ({player2}) win")
         print(f"[3] match null")
         print(f"[4] back")
         response = input()
@@ -87,3 +87,10 @@ class TournamentView:
     
     def match_saved(self):
         green("Match result saved !")
+
+    def round_saved(self):
+        green("Round saved !")
+
+    def new_round(self):
+        name = input("\nEnter round name :")
+        return name
