@@ -6,7 +6,6 @@ class PlayerController:
     def __init__(self):
         self.playermanager = PlayerManager()
 
-
     def create(self, nom, prenom, dob):
         player = Player(nom, prenom, dob)
         self.playermanager.save(player.serialize())

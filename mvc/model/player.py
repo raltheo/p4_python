@@ -1,5 +1,4 @@
 class Player:
-
     def __init__(self, nom: str, prenom: str, dob: str, pid: int = 0):
         self.pid = pid
         self.nom = nom

@@ -17,7 +17,7 @@ tournamentmanager = ManageTournament()
 playermanager = PlayerManager()
 roundmanager = RoundManager()
 matchmanager = MatchManager()
-# create player 
+# create player
 # print(playermanager.load_players())
 # for i in range(8):
 #     player = Player(f"test{i}",f"test{i}","20/12/2000")
@@ -38,14 +38,14 @@ matchmanager = MatchManager()
 # FIRST ROUND
 
 # round = Round(1, "round 1")
-# print(roundmanager.save(round.serialize())) # roundId = 1 
+# print(roundmanager.save(round.serialize())) # roundId = 1
 # tournamentmanager.add_round(tid=1, roundid=1)
 # print(tournamentmanager.load_tournament(1))
 
 
 # create match
 
-# first match 
+# first match
 
 # tid = 1
 # roundid = 1
@@ -103,17 +103,18 @@ matchmanager = MatchManager()
 
 # create rounddDDDDDDDDDDDDDDDDDDDDDDDDD
 
+
 def have_played_together(pairs, player1, player2):
     for pair in pairs:
-        if (player1 in pair and player2 in pair):
+        if player1 in pair and player2 in pair:
             return True
     return False
 
 
-rounds = tournamentmanager.load_tournament(1)['rounds']
-last_rid = rounds[len(rounds)-1]
+rounds = tournamentmanager.load_tournament(1)["rounds"]
+last_rid = rounds[len(rounds) - 1]
 last_round = roundmanager.load_round(last_rid)
-if last_round['finish'] == False:
+if last_round["finish"] == False:
     print("pas possible round avant pas fini")
     exit()
 
@@ -156,8 +157,8 @@ while players != []:
 
 
 print(new_match)
-    # matche = Match(4, player1=players[i], player2=players[i+1], scores=[0, 0])
-    # print(matche)
+# matche = Match(4, player1=players[i], player2=players[i+1], scores=[0, 0])
+# print(matche)
 
 # from datetime import datetime
 
@@ -175,26 +176,19 @@ print(new_match)
 # print(len(test2) % 2)
 
 
-
-
-
-
-
-
 tournois = {
     "id": 1,
     "name": "name",
-    "players": [1,2,3,4,5,6,7,8],
+    "players": [1, 2, 3, 4, 5, 6, 7, 8],
 }
 
 rounds = {
-    "idRound" : 1,
+    "idRound": 1,
     "tournoId": 1,
-    "name" : "Round 1",
+    "name": "Round 1",
     "start": "now",
-    "finish": False
+    "finish": False,
 }
-
 
 
 # print(players)

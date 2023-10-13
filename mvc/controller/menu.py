@@ -52,14 +52,21 @@ class MenuController:
         response = self.views.viewtournament.menu()
         if response == "1":
             players = self.manager.playermanager.load_players()
-            players_id, name, location, description, rounds = self.views.viewtournament.create_tournament(
-                players)
+            (
+                players_id,
+                name,
+                location,
+                description,
+                rounds,
+            ) = self.views.viewtournament.create_tournament(players)
             tid = self.controllers.tournamentcontroller.create_tournament(
-                players_id, name, location, description, rounds)
+                players_id, name, location, description, rounds
+            )
             if tid:
                 roundname = self.views.viewtournament.new_round()
                 ok = self.controllers.tournamentcontroller.create_first_round(
-                    tid, roundname)
+                    tid, roundname
+                )
                 if ok:
                     self.views.viewtournament.first_round()
             else:
@@ -86,17 +93,25 @@ class MenuController:
             if mid == "0":
                 return
             matche = self.manager.matchmanager.load_match(int(mid))
-            player1 = self.manager.playermanager.get_player(matche['player1'])[
-                'prenom'] + " " + self.manager.playermanager.get_player(matche['player1'])['nom']
-            player2 = self.manager.playermanager.get_player(matche['player2'])[
-                'prenom'] + " " + self.manager.playermanager.get_player(matche['player2'])['nom']
+            player1 = (
+                self.manager.playermanager.get_player(matche["player1"])["prenom"]
+                + " "
+                + self.manager.playermanager.get_player(matche["player1"])["nom"]
+            )
+            player2 = (
+                self.manager.playermanager.get_player(matche["player2"])["prenom"]
+                + " "
+                + self.manager.playermanager.get_player(matche["player2"])["nom"]
+            )
             result = self.views.viewtournament.update_score(player1, player2)
             if result == "4":
                 return
-            if self.controllers.tournamentcontroller.manage_point(int(mid), int(result)):
+            if self.controllers.tournamentcontroller.manage_point(
+                int(mid), int(result)
+            ):
                 self.views.viewtournament.match_saved()
             else:
                 self.views.viewtournament.error()
-            
+
             # except:
             #     self.views.viewtournament.error()

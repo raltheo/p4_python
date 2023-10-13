@@ -14,6 +14,7 @@ from mvc.manager.tournament import ManageTournament
 from mvc.manager.round import RoundManager
 from mvc.manager.match import MatchManager
 
+
 class MainController:
     def __init__(self):
         pass
@@ -37,4 +38,3 @@ class MainController:
 
         menucontroller = MenuController(views, controllers, manager)
         menucontroller.mainStart()
-

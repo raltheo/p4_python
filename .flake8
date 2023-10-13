@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 119
+ignore = F401, E722, W503, W291
+exclude = test.py

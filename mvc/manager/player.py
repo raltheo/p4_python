@@ -6,23 +6,26 @@ class PlayerManager:
         pass
 
     def save(self, player):
-        db_player = TinyDB('db/db.json').table('player')
+        db_player = TinyDB("db/db.json").table("player")
         try:
-            verif = db_player.search((where('nom') == self.nom) & (
-            where('prenom') == self.prenom) & (where('dob') == self.dob))
+            verif = db_player.search(
+                (where("nom") == self.nom)
+                & (where("prenom") == self.prenom)
+                & (where("dob") == self.dob)
+            )
         except:
             verif = False
         if not verif:
             self.pid = db_player.insert(player)
-            db_player.update({'id': self.pid}, doc_ids=[self.pid])
+            db_player.update({"id": self.pid}, doc_ids=[self.pid])
             return True
 
     def delete_player(self, pid):
-        db_player = TinyDB('db/db.json').table('player')
-        db_player.remove(where('id') == pid)
+        db_player = TinyDB("db/db.json").table("player")
+        db_player.remove(where("id") == pid)
 
     def load_players(self):
-        db_player = TinyDB('db/db.json').table('player')
+        db_player = TinyDB("db/db.json").table("player")
         db_player_all = db_player.all()
         columns = []
         for item in db_player_all:
@@ -36,7 +39,7 @@ class PlayerManager:
         return columns
 
     def get_player(self, pid):
-        db_player = TinyDB('db/db.json').table('player')
+        db_player = TinyDB("db/db.json").table("player")
         query = Query()
         db_player = db_player.search(query.id == pid)
         return db_player[0]

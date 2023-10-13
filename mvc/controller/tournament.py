@@ -28,15 +28,14 @@ class TournamentController:
         players = [int(player) for player in players]
         if self.has_duplicates(players):
             return False
-        if len(players) % 2 is not 0:
+        if len(players) % 2 != 0:
             return False
         if not rounds:
             tournament = Tournament(name, location, description, players)
             tid = self.tournamentmanager.save(tournament.serialize())
             return tid
         else:
-            tournament = Tournament(
-                name, location, description, players, int(rounds))
+            tournament = Tournament(name, location, description, players, int(rounds))
             tid = self.tournamentmanager.save(tournament.serialize())
             return tid
 
@@ -49,15 +48,16 @@ class TournamentController:
         random.shuffle(players)
         for i in range(0, len(players), 2):
             matche = Match(
-                rid, player1=players[i], player2=players[i+1], scores=[0, 0])
+                rid, player1=players[i], player2=players[i + 1], scores=[0, 0]
+            )
             self.matchmanager.save(matche.serialize())
         return True
 
     def manage_point(self, mid, result):
         matche = self.matchmanager.load_match(mid)
-        if matche['finish'] == True:
+        if matche["finish"]:
             return False
-        score = matche['scores']
+        score = matche["scores"]
         if result == 1:
             score[0] += 1
             self.matchmanager.update_score(mid, score)
@@ -69,27 +69,27 @@ class TournamentController:
             score[1] += 0.5
             self.matchmanager.update_score(mid, score)
 
-        matches = self.matchmanager.load_all_match(matche['roundId'])
+        matches = self.matchmanager.load_all_match(matche["roundId"])
         finish = True
         for match in matches:
-            if match[5] == False:
+            if not match[5]:
                 finish = False
         if finish:
-            self.roundmanager.finish_round(matche['roundId'])
+            self.roundmanager.finish_round(matche["roundId"])
         return True
 
     def have_played_together(self, pairs, player1, player2):
         for pair in pairs:
-            if (player1 in pair and player2 in pair):
+            if player1 in pair and player2 in pair:
                 return True
         return False
 
     def create_round(self, tid, name):
         # verifier si le dernier round est fini
-        rounds = self.tournamentmanager.load_tournament(tid)['rounds']
-        last_rid = rounds[len(rounds)-1]
+        rounds = self.tournamentmanager.load_tournament(tid)["rounds"]
+        last_rid = rounds[len(rounds) - 1]
         last_round = self.roundmanager.load_round(last_rid)
-        if last_round['finish'] == False:
+        if not last_round["finish"]:
             return False
 
         # recuperer tout les match sous forme [[player_id, player_id], [player_id, player_id]]
@@ -121,15 +121,23 @@ class TournamentController:
                 if self.have_played_together(all_matche, first[0], second[0]):
                     continue
                 players.remove(second)
-                matche = Match(new_rid, player1=first[0], player2=second[0], scores=[
-                               first[1], second[1]])
+                matche = Match(
+                    new_rid,
+                    player1=first[0],
+                    player2=second[0],
+                    scores=[first[1], second[1]],
+                )
                 self.matchmanager.save(matche.serialize())
                 found = True
                 break
             if not found:
                 second = players.pop(0)
-                matche = Match(new_rid, player1=first[0], player2=second[0], scores=[
-                               first[1], second[1]])
+                matche = Match(
+                    new_rid,
+                    player1=first[0],
+                    player2=second[0],
+                    scores=[first[1], second[1]],
+                )
                 self.matchmanager.save(matche.serialize())
 
         return True

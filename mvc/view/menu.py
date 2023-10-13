@@ -2,10 +2,9 @@ from mvc.view.player import PlayerView
 
 
 class ViewMenu:
-
     def Banner(self):
-        print(r"""
-    
+        print(
+            r"""    
                                                        .::.
                                             _()_       _::_
                                   _O      _/____\_   _/____\_
@@ -18,10 +17,12 @@ class ViewMenu:
   _|_|_    |___|_|   _|____|_   (_____)   (______)   (______)
  (_____)  (_______) (________) (_______) (________) (________)
  /_____\  /_______\ /________\ /_______\ /________\ /________\
-""")
+"""
+        )
 
     def begin(self):
         print(
-            "\n\n[1] Manage Tournament\n[2] Manage Player\n[3] View Some Stats\n[4] Exit")
+            "\n\n[1] Manage Tournament\n[2] Manage Player\n[3] View Some Stats\n[4] Exit"
+        )
         response = input()
         return response
