@@ -1,5 +1,5 @@
 from tinydb import TinyDB, Query, where
-
+from datetime import datetime
 
 class ManageTournament:
     def __init__(self):
@@ -55,3 +55,13 @@ class ManageTournament:
         query = Query()
         db_tournament = tournament_table.search(query.id == tid)
         return db_tournament[0]
+
+
+    def finish(self, tid):
+        now = datetime.now()
+        formatted_date = now.strftime("%d-%m-%Y-%H-%M")
+        tournament_table = TinyDB("db/db.json").table("tournament")
+        query = Query()
+        tournament = tournament_table.search(query.id == tid)[0]
+        tournament["end"] = formatted_date
+        tournament_table.update(tournament, query.id == tid)

@@ -43,3 +43,10 @@ class PlayerManager:
         query = Query()
         db_player = db_player.search(query.id == pid)
         return db_player[0]
+
+    def add_point(self, pid, point):
+        db_player = TinyDB("db/db.json").table("player")
+        query = Query()
+        player = db_player.search(query.id == pid)[0]
+        player["points"] = player["points"] + point
+        db_player.update(player, query.id == pid)

@@ -5,6 +5,7 @@ from mvc.model.match import Match
 from mvc.manager.tournament import ManageTournament
 from mvc.manager.round import RoundManager
 from mvc.manager.match import MatchManager
+from mvc.manager.player import PlayerManager
 
 import random
 
@@ -14,6 +15,7 @@ class TournamentController:
         self.tournamentmanager = ManageTournament()
         self.roundmanager = RoundManager()
         self.matchmanager = MatchManager()
+        self.playermanager = PlayerManager()
 
     def has_duplicates(self, lst):
         seen = set()
@@ -58,24 +60,47 @@ class TournamentController:
         if matche["finish"]:
             return False
         score = matche["scores"]
+        player1 = matche["player1"]
+        player2 = matche["player2"]
         if result == 1:
             score[0] += 1
+            self.playermanager.add_point(player1, 1)
             self.matchmanager.update_score(mid, score)
         if result == 2:
             score[1] += 1
+            self.playermanager.add_point(player2, 1)
             self.matchmanager.update_score(mid, score)
         if result == 3:
             score[0] += 0.5
             score[1] += 0.5
+            self.playermanager.add_point(player1, 0.5)
+            self.playermanager.add_point(player2, 0.5)
             self.matchmanager.update_score(mid, score)
 
+
+        ## check if round is finish
         matches = self.matchmanager.load_all_match(matche["roundId"])
+
         finish = True
         for match in matches:
             if not match[5]:
                 finish = False
         if finish:
             self.roundmanager.finish_round(matche["roundId"])
+
+        ## check if tournament is finish
+        tid = self.roundmanager.load_round(matche["roundId"])["tournoisId"]
+        tournament = self.tournamentmanager.load_tournament(tid)
+        max_round = tournament["round_total"]
+        if len(tournament["rounds"]) == max_round:
+            all_rounds = self.roundmanager.load_all_round(tid)
+            end = True
+            for round in all_rounds:
+                if round[3] == 'not finish':
+                    end = False
+            if end:
+                self.tournamentmanager.finish(tid)
+        
         return True
 
     def have_played_together(self, pairs, player1, player2):
@@ -87,11 +112,14 @@ class TournamentController:
     def create_round(self, tid, name):
         # verifier si le dernier round est fini
         rounds = self.tournamentmanager.load_tournament(tid)["rounds"]
+        max_round = self.tournamentmanager.load_tournament(tid)["round_total"]
         last_rid = rounds[len(rounds) - 1]
         last_round = self.roundmanager.load_round(last_rid)
         if not last_round["finish"]:
             return False
-
+        # si il y'a deja le nombre max de round emepecher add round
+        if len(rounds) >= max_round:
+            return False
         # recuperer tout les match sous forme [[player_id, player_id], [player_id, player_id]]
         all_matche = []
         for rid in rounds:

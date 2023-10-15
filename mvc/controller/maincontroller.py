@@ -2,11 +2,13 @@ from mvc.controller.menu import MenuController
 from mvc.controller.base import Controllers
 from mvc.controller.player import PlayerController
 from mvc.controller.tournament import TournamentController
+from mvc.controller.stats import StatsController
 
 from mvc.view.menu import ViewMenu
 from mvc.view.menu import PlayerView
 from mvc.view.base import Views
 from mvc.view.tournament import TournamentView
+from mvc.view.stats import ViewStats
 
 from mvc.manager.player import PlayerManager
 from mvc.manager.base import Managers
@@ -23,17 +25,19 @@ class MainController:
         viewmenu = ViewMenu()
         viewplayer = PlayerView()
         viewtournament = TournamentView()
+        viewstats = ViewStats()
 
         playercontroller = PlayerController()
         tournamentcontroller = TournamentController()
-
+        statscontroller = StatsController()
+ 
         playermanager = PlayerManager()
         tournamentmanager = ManageTournament()
         roundmanager = RoundManager()
         matchmanager = MatchManager()
 
-        views = Views(viewmenu, viewplayer, viewtournament)
-        controllers = Controllers(playercontroller, tournamentcontroller)
+        views = Views(viewmenu, viewplayer, viewtournament, viewstats)
+        controllers = Controllers(playercontroller, tournamentcontroller, statscontroller)
         manager = Managers(playermanager, tournamentmanager, roundmanager, matchmanager)
 
         menucontroller = MenuController(views, controllers, manager)

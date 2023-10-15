@@ -25,7 +25,7 @@ class Tournament:
             "nom": self.name,
             "location": self.location,
             "start": formatted_date,
-            "end": "after",
+            "end": "not finish",
             "round_total": self.round_total,
             "rounds": [],
             "players": self.players,

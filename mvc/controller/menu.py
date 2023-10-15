@@ -27,7 +27,8 @@ class MenuController:
             self.playerMenu()
             self.mainMenu()
         if response == "3":
-            print("pas encore fais")
+            self.stats()
+            self.mainMenu()
 
     def playerMenu(self):
         response = self.views.viewplayer.menu()
@@ -115,3 +116,17 @@ class MenuController:
 
             # except:
             #     self.views.viewtournament.error()
+
+
+    def stats(self):
+        response = self.views.viewstats.menu()
+        if response == "1":
+            data = self.controllers.statscontroller.alphabetic()
+            self.views.viewstats.player_alphabetic(data)
+        if response == "2":
+            data = self.manager.tournamentmanager.load_all_tournament()
+            self.views.viewstats.all_tournament(data)
+        if response	== "3":
+            tid = self.views.viewstats.tournament()
+            tournament = self.manager.tournamentmanager.load_tournament(int(tid))
+            self.views.viewstats.one_tournament([tournament["id"], tournament["nom"], tournament["location"], tournament["start"], tournament["end"]])
