@@ -1,5 +1,6 @@
 from prettytable import PrettyTable
 
+
 class ViewStats:
     def __init__(self):
         pass
@@ -13,8 +14,6 @@ class ViewStats:
         response = input()
         return response
 
-
-    
     def player_alphabetic(self, columns):
         x = PrettyTable()
         x.field_names = ["id", "nom", "prenom", "dob", "points"]
@@ -30,12 +29,11 @@ class ViewStats:
             x.add_row(item)
         print("\n")
         print(x)
-        
 
     def tournament(self):
         response = input("enter tournois id :")
         return response
-    
+
     def one_tournament(self, columns):
         x = PrettyTable()
         x.field_names = ["id", "nom", "location", "start", "end"]
@@ -57,7 +55,6 @@ class ViewStats:
         x.add_row(columns)
         print("")
         print(x)
-       
 
     def match(self, columns: list):
         x = PrettyTable()

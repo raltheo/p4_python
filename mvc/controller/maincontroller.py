@@ -30,14 +30,16 @@ class MainController:
         playercontroller = PlayerController()
         tournamentcontroller = TournamentController()
         statscontroller = StatsController()
- 
+
         playermanager = PlayerManager()
         tournamentmanager = ManageTournament()
         roundmanager = RoundManager()
         matchmanager = MatchManager()
 
         views = Views(viewmenu, viewplayer, viewtournament, viewstats)
-        controllers = Controllers(playercontroller, tournamentcontroller, statscontroller)
+        controllers = Controllers(
+            playercontroller, tournamentcontroller, statscontroller
+        )
         manager = Managers(playermanager, tournamentmanager, roundmanager, matchmanager)
 
         menucontroller = MenuController(views, controllers, manager)

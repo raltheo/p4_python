@@ -77,8 +77,7 @@ class TournamentController:
             self.playermanager.add_point(player2, 0.5)
             self.matchmanager.update_score(mid, score)
 
-
-        ## check if round is finish
+        # check if round is finish
         matches = self.matchmanager.load_all_match(matche["roundId"])
 
         finish = True
@@ -88,7 +87,7 @@ class TournamentController:
         if finish:
             self.roundmanager.finish_round(matche["roundId"])
 
-        ## check if tournament is finish
+        # check if tournament is finish
         tid = self.roundmanager.load_round(matche["roundId"])["tournoisId"]
         tournament = self.tournamentmanager.load_tournament(tid)
         max_round = tournament["round_total"]
@@ -96,11 +95,11 @@ class TournamentController:
             all_rounds = self.roundmanager.load_all_round(tid)
             end = True
             for round in all_rounds:
-                if round[3] == 'not finish':
+                if round[3] == "not finish":
                     end = False
             if end:
                 self.tournamentmanager.finish(tid)
-        
+
         return True
 
     def have_played_together(self, pairs, player1, player2):

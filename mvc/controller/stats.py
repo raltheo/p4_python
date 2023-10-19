@@ -1,6 +1,8 @@
 from mvc.manager.player import PlayerManager
 from mvc.manager.tournament import ManageTournament
 from mvc.manager.match import MatchManager
+
+
 class StatsController:
     def __init__(self):
         self.playermanager = PlayerManager()
@@ -27,7 +29,7 @@ class StatsController:
         sorted_data = sorted(players, key=lambda x: x[1])
         print(sorted_data)
         return sorted_data
-    
+
     def match_round(self, rid):
         matches = self.matchmanager.load_all_match(rid)
         for matche in matches:

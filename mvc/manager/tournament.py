@@ -1,6 +1,7 @@
 from tinydb import TinyDB, Query, where
 from datetime import datetime
 
+
 class ManageTournament:
     def __init__(self):
         pass
@@ -55,7 +56,6 @@ class ManageTournament:
         query = Query()
         db_tournament = tournament_table.search(query.id == tid)
         return db_tournament[0]
-
 
     def finish(self, tid):
         now = datetime.now()

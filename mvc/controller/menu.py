@@ -117,7 +117,6 @@ class MenuController:
             # except:
             #     self.views.viewtournament.error()
 
-
     def stats(self):
         response = self.views.viewstats.menu()
         if response == "1":
@@ -126,10 +125,18 @@ class MenuController:
         if response == "2":
             data = self.manager.tournamentmanager.load_all_tournament()
             self.views.viewstats.all_tournament(data)
-        if response	== "3":
+        if response == "3":
             tid = self.views.viewstats.tournament()
             tournament = self.manager.tournamentmanager.load_tournament(int(tid))
-            self.views.viewstats.one_tournament([tournament["id"], tournament["nom"], tournament["location"], tournament["start"], tournament["end"]])
+            self.views.viewstats.one_tournament(
+                [
+                    tournament["id"],
+                    tournament["nom"],
+                    tournament["location"],
+                    tournament["start"],
+                    tournament["end"],
+                ]
+            )
         if response == "4":
             tid = self.views.viewstats.tournament()
             players = self.controllers.statscontroller.all_players(int(tid))
@@ -139,7 +146,8 @@ class MenuController:
             tournament = self.manager.tournamentmanager.load_tournament(int(tid))
             for round in tournament["rounds"]:
                 r = self.manager.roundmanager.load_round(round)
-                self.views.viewstats.rounds([r["roundId"], r["name"], r["start"], r["end"], r["finish"]])
+                self.views.viewstats.rounds(
+                    [r["roundId"], r["name"], r["start"], r["end"], r["finish"]]
+                )
                 matches = self.controllers.statscontroller.match_round(round)
                 self.views.viewstats.match(matches)
-                
