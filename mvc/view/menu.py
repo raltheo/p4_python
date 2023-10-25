@@ -1,5 +1,5 @@
 from mvc.view.player import PlayerView
-
+from mvc.utils.validate import int_input
 
 class ViewMenu:
     def Banner(self):
@@ -25,4 +25,7 @@ class ViewMenu:
             "\n\n[1] Manage Tournament\n[2] Manage Player\n[3] View Some Stats\n[4] Exit"
         )
         response = input()
+        while not int_input(response):
+            print("please enter a number")
+            response = input()
         return response

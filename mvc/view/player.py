@@ -1,6 +1,6 @@
 from prettytable import PrettyTable
 from mvc.controller.player import PlayerController
-from mvc.utils.validate import validate_dob
+from mvc.utils.validate import validate_dob, int_input
 
 
 def green(text):
@@ -20,12 +20,18 @@ class PlayerView:
         print("\n")
         print(x)
         response = input("\nChoose a player id : ")
+        while not int_input(response):
+            print("please enter a number")
+            response = input("\nChoose a player id : ")
         return response
 
     def menu(self):
         print("\n[1] Create Player\n[2] Delete Player\n[3] Back")
-        repsonse = input()
-        return repsonse
+        response = input()
+        while not int_input(response):
+            print("please enter a number")
+            response = input()
+        return response
 
     def promtNewPlayer(self):
         print("\n")

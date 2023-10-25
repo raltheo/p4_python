@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-from mvc.utils.validate import validate_player_tournament
+from mvc.utils.validate import validate_player_tournament, int_input
 
 
 def green(text):
@@ -16,8 +16,11 @@ class TournamentView:
 
     def menu(self):
         print("\n[1] Create Tournament\n[2] Continue Tournament\n[3] Back")
-        repsonse = input()
-        return repsonse
+        response = input()
+        while not int_input(response):
+            print("please enter a number")
+            response = input()
+        return response
 
     def create_tournament(self, columns: list):
         x = PrettyTable()
@@ -61,6 +64,9 @@ class TournamentView:
         print(x)
         print("[back] return menu")
         tournament_id = input("\nChoose tournament id: ")
+        while not int_input(tournament_id):
+            print("please enter number or back")
+            tournament_id = input("\nChoose tournament id: ")
         return tournament_id
 
     def rounds(self, columns: list):
@@ -73,6 +79,9 @@ class TournamentView:
         print("[0] Create new round")
         print("[back] return menu")
         round_id = input("\nChoose round id: ")
+        while not int_input(round_id):
+            print("please enter number or back")
+            round_id = input("\nChoose round id: ")
         return round_id
 
     def match(self, columns: list):
@@ -91,6 +100,9 @@ class TournamentView:
         print(x)
         print("[0] back")
         round_id = input("\nChoose match id for update result: ")
+        while not int_input(round_id):
+            print("please enter a number")
+            round_id = input("\nChoose match id for update result: ")
         return round_id
 
     def update_score(self, player1, player2):
@@ -100,6 +112,9 @@ class TournamentView:
         print("[3] match null")
         print("[4] back")
         response = input()
+        while not int_input(response):
+            print("please enter a number")
+            response = input()
         return response
 
     def match_saved(self):

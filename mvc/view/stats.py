@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-
+from mvc.utils.validate import validate_dob, int_input
 
 class ViewStats:
     def __init__(self):
@@ -12,6 +12,9 @@ class ViewStats:
         print("[4] all players form a tournament")
         print("[5] show all rounds and match from a tournament")
         response = input()
+        while not int_input(response):
+            print("please enter a number")
+            response = input()
         return response
 
     def player_alphabetic(self, columns):
@@ -32,6 +35,9 @@ class ViewStats:
 
     def tournament(self):
         response = input("enter tournois id :")
+        while not int_input(response):
+            print("please enter a number")
+            response = input()
         return response
 
     def one_tournament(self, columns):
