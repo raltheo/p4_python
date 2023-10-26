@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 from mvc.utils.validate import validate_dob, int_input
 
+
 class ViewStats:
     def __init__(self):
         pass

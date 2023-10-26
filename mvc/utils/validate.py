@@ -23,11 +23,10 @@ def validate_player_tournament(id_list, input_id):
         return True, 0
     except:
         return False, "Please enter number"
-    
 
-    
+
 def int_input(inputs):
-    try :
+    try:
         if inputs == "back":
             return True
         int(inputs)

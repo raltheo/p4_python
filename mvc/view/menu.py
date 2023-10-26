@@ -1,6 +1,7 @@
 from mvc.view.player import PlayerView
 from mvc.utils.validate import int_input
 
+
 class ViewMenu:
     def Banner(self):
         print(
