@@ -1,0 +1,7 @@
+flake8==6.1.0
+mccabe==0.7.0
+prettytable==3.9.0
+pycodestyle==2.11.1
+pyflakes==3.1.0
+tinydb==4.8.0
+wcwidth==0.2.8
