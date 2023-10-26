@@ -27,7 +27,6 @@ class StatsController:
             temp.append(player["points"])
             players.append(temp)
         sorted_data = sorted(players, key=lambda x: x[1])
-        print(sorted_data)
         return sorted_data
 
     def match_round(self, rid):
